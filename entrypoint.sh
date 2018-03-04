@@ -18,7 +18,7 @@ if [ -d "${SUPPORTING_FILES_SRC}" ] ; then
 fi
 
 echo "Building ..."
-cd ${FULL_PACKAGE} && GOARCH="amd64" GOOS="linux" CGO_ENABLED=0 go build -tags node -tags "${FUNCTION}" -o "${ZIP_SRC_DIR}/${GOBIN}"
+cd ${FULL_PACKAGE} && GOARCH="amd64" GOOS="linux" CGO_ENABLED=0 go build -tags="node ${FUNCTION}" -o "${ZIP_SRC_DIR}/${GOBIN}"
 
 echo "Packagig ${ZIP_FILENAME}"
 cd ${ZIP_SRC_DIR} && zip -r ${ZIP_FILENAME} main node_modules index.js package.json supportingFiles -x *build*

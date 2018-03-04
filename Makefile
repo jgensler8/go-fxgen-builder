@@ -1,6 +1,6 @@
 
 TAG=jgensl2/go-fxgen-builder
-VERSION=v3.0.0
+VERSION=v4.0.0
 PACKAGE=github.com/jgensler8/go-fxgen-builder/example
 FUNCTION=hello
 
