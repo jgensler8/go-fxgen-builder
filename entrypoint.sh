@@ -11,13 +11,14 @@ export FULL_PACKAGE=/go/src/${PACKAGE}
 mkdir -p $(dirname ${FULL_PACKAGE})
 ln -s /workdir ${FULL_PACKAGE}
 
-echo "Building ..."
-GOARCH="amd64" GOOS="linux" CGO_ENABLED=0 go build -tags node -tags "${FUNCTION}" -o "${ZIP_SRC_DIR}/${GOBIN}"
 export SUPPORTING_FILES_SRC=/workdir/supportingFiles
 if [ -d "${SUPPORTING_FILES_SRC}" ] ; then
   echo "Copying supportingFiles"
   cp -r ${SUPPORTING_FILES_SRC} ${ZIP_SRC_DIR}
 fi
+
+echo "Building ..."
+cd ${FULL_PACKAGE} && GOARCH="amd64" GOOS="linux" CGO_ENABLED=0 go build -tags node -tags "${FUNCTION}" -o "${ZIP_SRC_DIR}/${GOBIN}"
 
 echo "Packagig ${ZIP_FILENAME}"
 cd ${ZIP_SRC_DIR} && zip -r ${ZIP_FILENAME} main node_modules index.js package.json supportingFiles -x *build*
